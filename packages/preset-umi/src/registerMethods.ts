@@ -23,6 +23,7 @@ export default (api: IApi) => {
     'addBeforeMiddlewares',
     'addLayouts',
     'addMiddlewares',
+    'addApiMiddlewares',
     'addRuntimePlugin',
     'addRuntimePluginKey',
     // 'addUmiExports',

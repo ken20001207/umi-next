@@ -56,6 +56,10 @@ export type IEntryImport = {
   source: string;
   specifier?: string;
 };
+export type IApiMiddleware = {
+  name: string;
+  path: string;
+};
 export type IRoute = ICoreRoute;
 export type IApi = PluginAPI &
   IServicePluginAPI & {

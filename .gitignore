@@ -4,6 +4,7 @@
 /examples/*/.umi
 /examples/*/.umi-production
 /examples/*/src/.umi
+/examples/*/api
 /examples/*/src/.umi-production
 /examples/libs/monorepo/foo/.mfsu
 /examples/libs/monorepo/foo/.umi

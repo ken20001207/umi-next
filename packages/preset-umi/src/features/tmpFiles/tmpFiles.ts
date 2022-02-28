@@ -24,6 +24,33 @@ export default (api: IApi) => {
         require.resolve('@umijs/renderer-react/package.json'),
       ),
     });
+
+    // API Routes
+    const apiRoutes = Object.keys(api.appData.routes)
+      .filter((key) => api.appData.routes[key].file.startsWith('api/'))
+      .map((k) => api.appData.routes[k]);
+    apiRoutes.map((apiRoute) => {
+      api.writeTmpFile({
+        noPluginDir: true,
+        path: apiRoute.file,
+        tplPath: join(TEMPLATES_DIR, 'apiRoute.tpl'),
+        context: {
+          apiRootDirPath: api.paths.absTmpPath + '/api',
+          handlerPath: api.paths.absPagesPath + apiRoute.file,
+        },
+      });
+    });
+    const middlewares: { name: string; path: string }[] =
+      await api.applyPlugins({
+        key: 'addApiMiddlewares',
+      });
+    api.writeTmpFile({
+      noPluginDir: true,
+      path: 'api/_middlewares.ts',
+      tplPath: join(TEMPLATES_DIR, 'middlewares.tpl'),
+      context: { middlewares },
+    });
+
     // umi.ts
     api.writeTmpFile({
       noPluginDir: true,
